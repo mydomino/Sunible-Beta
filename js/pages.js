@@ -62,13 +62,13 @@ function composeDynamicMessagePage(options)
 	if (options == undefined)
 	{
 		showMessage('composeDynamicPage(): options is required parameter.');
-		return;		
+		return;
 	}
 
 	if (options.pageHtml == undefined)
 	{
 		showMessage('composeDynamicPage(): options.pageHtml is required parameter.');
-		return;		
+		return;
 	}
 
 	var $page = $('#page-message');
@@ -87,9 +87,9 @@ function composeDynamicMessagePage(options)
 		{
 			options.buttonText = "Ok";
 		}
-		var $okButton = $('' + 
-			'<button type="button" class="btn page_message_ok">' + 
-				options.buttonText + 
+		var $okButton = $('' +
+			'<button type="button" class="btn page_message_ok">' +
+				options.buttonText +
 			'</button>');
 		$page.append($okButton);
 		$okButton.click(function(){
@@ -112,7 +112,7 @@ function showThankYouPage()
 	var pageHtml = '';
 	var messagePageOptions = {
 		pageHtml: pageHtml,
-		pageClass: 'registration_complete', 
+		pageClass: 'registration_complete',
 		buttonText: 'Return to homepage',
 		okCallback : function(){
 			var $currentPage = $('.page.is_shown');
@@ -136,7 +136,7 @@ function showNoDataFoundPage()
 		'<p>There is no data found for your request.</p>';
 	var messagePageOptions = {
 		pageHtml: pageHtml,
-		pageClass: 'no_data_found', 
+		pageClass: 'no_data_found',
 		buttonText: 'Return to homepage',
 		okCallback : function(){
 			var $currentPage = $('.page.is_shown');
@@ -296,7 +296,16 @@ function updateSocialCounters(data)
 function showSocialProofMap(data)
 {
 	var markerSource = data[1].geodata;
-	var zipGeo = [ data[0].latitude, data[0].longitude ];
+	var zipGeo = [ data[0].longitude, data[0].latitude ];
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoibXlkb21pbm8iLCJhIjoiY2ozMjdjMmgwMDAwYzJxcWIwa2ZrZTh2MyJ9.fa4RbbSw_2tLOzB0sHcOKw';
+	var mmap = new mapboxgl.Map({
+									container: 'page-social_proof-map',
+									style: 'mapbox://styles/mapbox/streets-v9',
+									zoom: 11,
+									center: zipGeo //in longitude, latitude order
+								});
+
 	var $mapContainer = $('#page-social_proof-map');
 	var mapInitialized = ($mapContainer.data('map') != undefined);
 	var map;
@@ -595,7 +604,7 @@ function bindOpenSignUpPage($button)
 function showSignUpPopup()
 {
 	var $popup = $('#modal-page-sign_up');
-	$popup.modal();	
+	$popup.modal();
 }
 
 function initSignUpForm()
@@ -654,7 +663,7 @@ function bindPrivacyPolicyPopup($launcher)
 {
 	$launcher.click(function(){
 		openPrivacyPolicyPopup();
-	});	
+	});
 }
 
 function openPrivacyPolicyPopup()
@@ -678,7 +687,7 @@ function bindFaqsPopup($launcher)
 {
 	$launcher.click(function(){
 		openFaqsPopup();
-	});	
+	});
 }
 
 function openFaqsPopup()
@@ -693,9 +702,9 @@ $(function(){
 
 	$('#faq li a').each(function(){
 		$(this).click(function(){
-			$(this).siblings('div').slideToggle(300);			
-		});		
-	});				
+			$(this).siblings('div').slideToggle(300);
+		});
+	});
 
 });
 
@@ -705,7 +714,7 @@ function bindAboutUsPopup($launcher)
 {
 	$launcher.click(function(){
 		openAboutUsPopup();
-	});	
+	});
 }
 
 function openAboutUsPopup()
@@ -722,7 +731,7 @@ function bindJobsPopup($launcher)
 {
 	$launcher.click(function(){
 		openJobsPopup();
-	});	
+	});
 }
 
 function openJobsPopup()
@@ -740,7 +749,7 @@ function bindBlogPopup($launcher)
 {
 	$launcher.click(function(){
 		openBlogPopup();
-	});	
+	});
 }
 
 function openBlogPopup()

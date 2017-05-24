@@ -11,16 +11,14 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap-modal.css"/>
 		<link rel="stylesheet" type="text/css" href="css/flat-ui.css"/>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-		<!--[if lte IE 8]>
-			<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
-		<![endif]-->
 		<link rel="stylesheet" type="text/css" href="css/nanoscroller.css"/>
 		<link rel="stylesheet" type="text/css" href="css/general.css"/>
 		<link rel="stylesheet" type="text/css" href="css/fonts.css"/>
 		<link rel="stylesheet" type="text/css" href="css/forms.css"/>
 		<link rel="stylesheet" type="text/css" href="css/layout.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages.css"/>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' />
+
 		<!-- IE code -->
 		<script type="text/javascript">var ie;</script>
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements.  All other JS at the end of file.  -->
@@ -35,7 +33,7 @@
 		<!--[if lt IE 9]>
 			<script type="text/javascript" src="js/html5shiv.js"></script>
 		<![endif]-->
-	
+
 		<!--GOOGLE ANALYTICS TRACKING SCRIPT-->
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
@@ -143,8 +141,6 @@
 		<script type="text/javascript" src="js/bootstrap/bootstrap-tooltip.js"></script>
 		<script type="text/javascript" src="js/bootstrap/bootstrap-modalmanager.js"></script>
 		<script type="text/javascript" src="js/bootstrap/bootstrap-modal.js"></script>
-		<script type="text/javascript" src="js/leaflet.js"></script>
-		<script type="text/javascript" src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-map.js?key=Fmjtd%7Cluur2h07nu%2Cra%3Do5-9wb29r"></script>
 		<script type="text/javascript" src="js/custom_checkbox_and_radio.js"></script>
 
 		<script type="text/javascript" src="js/global_methods.js"></script>
@@ -155,5 +151,8 @@
 		<script type="text/javascript" src="js/application_init.js"></script>
 		<!-- CLICKY TRACKING SCRIPT -->
 		<script src="//static.getclicky.com/js" type="text/javascript"></script>
+		<!-- Mapbox script -->
+		<script src='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js'></script>
+
 	</body>
 </html>
