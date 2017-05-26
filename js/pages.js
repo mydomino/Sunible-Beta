@@ -311,20 +311,17 @@ function showSocialProofMap(data)
 		map.zoomTo(13, {'duration': 4000, 'animate': true});
 		// Add the points for solar installs
 		map.addLayer({
-			"id": "points",
-			"type": "circle",
-			"source": {
-				"type": "geojson",
-				"data": {
-					"type": "Feature",
-					"geometry": {
-						"type": "Point",
-						"coordinates": zipGeo
-					}
-				}
-			},
-			"minzoom": 12
-		});
+            id: "points",
+            type: "circle",
+            source: {
+                type: "geojson",
+                data: {
+                    type: "FeatureCollection",
+                    	features: composeMapBounds(markerSource)
+                }
+            },
+            minzoom: 12
+        });
 
 	});
 }
@@ -332,24 +329,25 @@ function showSocialProofMap(data)
 function composeMapBounds(source)
 {
 	//var markers = [];
-	var popups  = [];
 	var coordinates  = [];
 	if (source == undefined && map == undefined) return [];
 	for (var i = 0; i < source.length; i++)
 	{
 		if (source[i].latitude != undefined && source[i].longitude != undefined)
 		{
-			//markers.push(createLeafletMarker(source[i]));
-			popups.push(createLeafletMarkerPopup(source[i]));
-			coordinates.push( [source[i].latitude, source[i].longitude] );
+
+			coordinates.push(
+			{
+				"type":"Feature",
+				"geometry": {
+					"type":"Point",
+					"coordinates":[source[i].longitude, source[i].latitude]
+				}
+			});
 		}
 	};
 
-	return {
-		//markers: markers,
-		popups: popups,
-		coordinates: coordinates
-	};
+	return coordinates
 }
 
 function createLeafletMarker(source)
