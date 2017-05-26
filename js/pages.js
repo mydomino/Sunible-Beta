@@ -309,6 +309,23 @@ function showSocialProofMap(data)
 	map.on('load', function () {
 		// Zoom in to neighborhood after map loads
 		map.zoomTo(13, {'duration': 4000, 'animate': true});
+		// Add the points for solar installs
+		map.addLayer({
+			"id": "points",
+			"type": "circle",
+			"source": {
+				"type": "geojson",
+				"data": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": zipGeo
+					}
+				}
+			},
+			"minzoom": 12
+		});
+
 	});
 }
 
