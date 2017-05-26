@@ -299,64 +299,17 @@ function showSocialProofMap(data)
 	var zipGeo = [ data[0].longitude, data[0].latitude ];
 
 	mapboxgl.accessToken = 'pk.eyJ1IjoibXlkb21pbm8iLCJhIjoiY2ozMjdjMmgwMDAwYzJxcWIwa2ZrZTh2MyJ9.fa4RbbSw_2tLOzB0sHcOKw';
-	var mmap = new mapboxgl.Map({
+	var map = new mapboxgl.Map({
 									container: 'page-social_proof-map',
 									style: 'mapbox://styles/mapbox/streets-v9',
-									zoom: 11,
+									zoom: 6,
 									center: zipGeo //in longitude, latitude order
 								});
 
-	var $mapContainer = $('#page-social_proof-map');
-	var mapInitialized = ($mapContainer.data('map') != undefined);
-	var map;
-	var layerMarkers;
-	var layerPopups;
-	var boundsCoordinates;
-	if (mapInitialized)
-	{
-		map = $mapContainer.data('map');
-
-		// markers
-		//layerMarkers = $mapContainer.data('layerMarkers');
-		//$mapContainer.data('layerMarkers', null); // clear marker layer data
-		//layerMarkers.clearLayers();
-
-		// popups
-		layerPopups  = $mapContainer.data('layerPopups');
-		$mapContainer.data('layerPopups', null); // clear popups layer data
-		layerPopups.clearLayers();
-	}
-	else
-	{
-		if (isSafari()) L.Browser.webkit3d = false; // RLY: issue #28
-		map = L.map('page-social_proof-map', {
-			layers: MQ.mapLayer(),
-			center: zipGeo,
-			zoom: 13,
-			maxZoom: 18,
-			closePopupOnClick: false
-		});
-		$mapContainer.data('map', map);
-//http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png
-		//L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-			//maxZoom: 18
-		//}).addTo(map);
-	}
-	var bounds = composeMapBounds(markerSource);
-	// adding markers to map
-	//layerMarkers = L.layerGroup(bounds.markers);
-	//layerMarkers.addTo(map);
-	//$mapContainer.data('layerMarkers', layerMarkers);
-
-	// adding popups to map
-	layerPopups = L.layerGroup(bounds.popups);
-	layerPopups.addTo(map);
-	$mapContainer.data('layerPopups', layerPopups);
-	// bounds coordinates
-	//L.Bounds(bounds.coordinates);
-	//map.fitBounds(bounds.coordinates);
-	map.panTo(new L.LatLng(data[0].latitude, data[0].longitude));
-	if (isSafari()) L.Browser.webkit3d = true; // RLY: issue #28
+	map.on('load', function () {
+		// Zoom in to neighborhood after map loads
+		map.zoomTo(13, {'duration': 4000, 'animate': true});
+	});
 }
 
 function composeMapBounds(source)
