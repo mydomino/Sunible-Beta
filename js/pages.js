@@ -309,32 +309,48 @@ function showSocialProofMap(data)
 	map.on('load', function () {
 		// Zoom in to neighborhood after map loads
 		map.zoomTo(13, {'duration': 4000, 'animate': true});
+
 		// Add the points for solar installs
-		map.addLayer({
-            id: "points",
-            type: "circle",
-            source: {
-                type: "geojson",
-                data: {
-                    type: "FeatureCollection",
-                    	features: composeMapBounds(markerSource)
-                }
-            },
-            minzoom: 12
-        });
+		// map.addLayer({
+    //         id: "points",
+    //         type: "circle",
+    //         source: {
+    //             type: "geojson",
+    //             data: {
+    //                 type: "FeatureCollection",
+    //                 	features: composeMapBounds(markerSource)
+    //             }
+    //         },
+    //         minzoom: 12
+    //     });
+		composeMapBounds(markerSource, map);
 
 	});
 }
 
-function composeMapBounds(source)
+function composeMapBounds(source, map)
 {
 	//var markers = [];
 	var coordinates  = [];
+
 	if (source == undefined && map == undefined) return [];
 	for (var i = 0; i < source.length; i++)
 	{
 		if (source[i].latitude != undefined && source[i].longitude != undefined)
 		{
+			var popup = new mapboxgl.Popup({offset: 25, closeButton: false})
+				.setText(source[i].total_install_number + " solar roofs")
+				.setLngLat([source[i].longitude, source[i].latitude])
+				.addTo(map);
+
+			// create DOM element for the marker
+			var el = document.createElement('div');
+			el.id = 'marker';
+
+			// create the marker
+			new mapboxgl.Marker(el, {offset:[-16, -16]})
+					.setLngLat([source[i].longitude, source[i].latitude])
+					.addTo(map);
 
 			coordinates.push(
 			{
